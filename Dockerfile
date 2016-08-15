@@ -8,7 +8,7 @@ ADD install-tools.sh /install-tools.sh
 RUN /install-tools.sh
 
 ADD add-user.sh /add-user.sh
-RUN /add-user.sh ${RUN_USER}
+RUN /add-user.sh
 
 RUN rm -f /install-tools.sh /add-user.sh
 
