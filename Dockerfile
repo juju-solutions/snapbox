@@ -1,18 +1,17 @@
 FROM ubuntu:16.04
 
-ENV RUN_USER=snapper
+VOLUME "/snaps"
 
-VOLUME "/home/${RUN_USER}/snap"
+RUN apt-get update -qq -y && \
+    apt-get install -y \
+    build-essential \
+    bzr \
+    git \
+    openssh-client \
+    snapcraft \
+    snapd \
+    unzip
 
-ADD install-tools.sh /install-tools.sh
-RUN /install-tools.sh
-
-ADD add-user.sh /add-user.sh
-RUN /add-user.sh
-
-RUN rm -f /install-tools.sh /add-user.sh
-
-ADD run.sh /run.sh
-
-WORKDIR "/home/${RUN_USER}"
-ENTRYPOINT "/run.sh"
+WORKDIR /snaps
+ENTRYPOINT snapcraft clean
+ENTRYPOINT snapcraft
