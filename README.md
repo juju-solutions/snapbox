@@ -3,22 +3,30 @@
 A Docker container that contains the tools to create 
 [snaps](http://snapcraft.io).
 
-## Usage
+# Usage
 
-If you already have Docker installed, then you must build the container.
+This image is conveniently located on the docker hub
 
-```bash
-docker build -t snapbox .
+```
+docker pull jujusolutions/snapbox:onbuild
 ```
 
 Now you can run the container by the following command:
 
 ```bash
-docker run --rm -it -v host/snap/directory:/home/snapper/snaps snapbox 
+docker run --rm  -v $PWD:/snaps jujusolutions/snapbox:onbuild
+```
+This assumes you're in your snapcraftable directory which contains `snapcraft.yaml`
+and will execute the full build routine via `snapcraft`
+
+# Pro Tip
+
+If you're like me and hate typing in long form docker commands, this can be
+aliased:
+
+```
+alias snapbuild=`docker run --rm -v $PWD:/snaps jujusolutions/snapbox:onbuild
 ```
 
-When inside the container you have all the snapcraft tools installed and 
-can build snaps. Using the volume mount to a directory on the host will save 
-the built snaps to your host and persist after the snapbox is removed.
 
 Get snapping!
