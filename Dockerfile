@@ -13,4 +13,5 @@ RUN apt-get update -qq -y && \
     unzip
 
 WORKDIR /snaps
-CMD snapcraft
+ENTRYPOINT snapcraft clean
+ENTRYPOINT snapcraft
